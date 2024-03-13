@@ -6,10 +6,11 @@ import gql from "graphql-tag";
 
 class SongList extends Component {
 	handleDeleteSong(id) {
-		this.props.mutate({
-			variables: { id },
-			refetchQueries: [{ query: fetchSongsQuery }],
-		});
+		this.props
+			.mutate({
+				variables: { id },
+			})
+			.then(() => this.props.data.refetch());
 	}
 
 	renderSongs() {
@@ -19,13 +20,13 @@ class SongList extends Component {
 			return <div>loading...</div>;
 		}
 
-		return songs.map((song) => (
-			<ul key={song.id} className="collection">
+		return songs.map(({ id, title }) => (
+			<ul key={id} className="collection">
 				<li className="collection-item">
-					{song.title}
+					{title}
 					<i
 						className="material-icons"
-						onClick={() => this.handleDeleteSong(song.id)}>
+						onClick={() => this.handleDeleteSong(id)}>
 						delete
 					</i>
 				</li>
