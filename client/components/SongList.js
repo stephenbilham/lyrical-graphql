@@ -23,7 +23,7 @@ class SongList extends Component {
 }
 
 const query = gql`
-	{
+	query {
 		songs {
 			id
 			title
