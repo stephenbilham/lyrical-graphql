@@ -14,32 +14,27 @@ class SongList extends Component {
 	}
 
 	renderSongs() {
-		const { loading, songs } = this.props.data;
-
-		if (loading) {
-			return <div>loading...</div>;
-		}
-
-		return songs.map(({ id, title }) => (
-			<ul key={id} className="collection">
-				<li className="collection-item">
+		return this.props.data.songs.map(({ id, title }) => {
+			return (
+				<li key={id} className="collection-item">
 					{title}
-					<i
-						className="material-icons"
-						onClick={() => this.handleDeleteSong(id)}>
+					<i className="material-icons" onClick={() => this.onSongDelete(id)}>
 						delete
 					</i>
 				</li>
-			</ul>
-		));
+			);
+		});
 	}
 
 	render() {
+		if (this.props.data.loading) {
+			return <div>Loading...</div>;
+		}
+
 		return (
 			<div>
-				<h3>Song List</h3>
-				{this.renderSongs()}
-				<Link to="/songs/new" className="btn-floating btn-large red light">
+				<ul className="collection">{this.renderSongs()}</ul>
+				<Link to="/songs/new" className="btn-floating btn-large red right">
 					<i className="material-icons">add</i>
 				</Link>
 			</div>
