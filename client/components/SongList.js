@@ -13,9 +13,7 @@ class SongList extends Component {
 			.then(() => this.props.data.refetch());
 	}
 
-	handleRedirect(id) {
-		console.log(this.props.route.go("/hello"));
-	}
+	handleRedirect(id) {}
 
 	renderSongs() {
 		return this.props.data.songs.map(({ id, title }) => {
