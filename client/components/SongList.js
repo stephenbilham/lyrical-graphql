@@ -13,16 +13,11 @@ class SongList extends Component {
 			.then(() => this.props.data.refetch());
 	}
 
-	handleRedirect(id) {}
-
 	renderSongs() {
 		return this.props.data.songs.map(({ id, title }) => {
 			return (
-				<li
-					key={id}
-					className="collection-item"
-					onClick={() => this.handleRedirect(id)}>
-					{title}
+				<li key={id} className="collection-item">
+					<Link to={`songs/${id}`}>{title}</Link>
 					<i className="material-icons" onClick={() => this.onSongDelete(id)}>
 						delete
 					</i>
