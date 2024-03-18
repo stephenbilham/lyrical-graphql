@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
-import fetchLyrics from "../queries/fetchLyrics";
 
 class LyricCreate extends Component {
 	constructor(props) {
@@ -11,7 +10,6 @@ class LyricCreate extends Component {
 
 	formSubmit(e) {
 		e.preventDefault();
-		console.log(this.props);
 		try {
 			this.props.mutate({
 				variables: {
