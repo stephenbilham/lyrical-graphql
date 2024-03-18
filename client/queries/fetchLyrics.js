@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export default gql`
-	query GetLyrics($id: ID!) {
+	query GetLyric($id: ID!) {
 		lyric(id: $id) {
 			id
 			song
