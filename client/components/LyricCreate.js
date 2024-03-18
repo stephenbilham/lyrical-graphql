@@ -18,7 +18,6 @@ class LyricCreate extends Component {
 				},
 			});
 			this.setState({ content: "" });
-			window.alert("Succesfully added lyric to song!");
 		} catch (err) {
 			console.log(err);
 		}
@@ -46,6 +45,7 @@ const addLyricMutation = gql`
 			lyrics {
 				id
 				content
+				likes
 			}
 		}
 	}
