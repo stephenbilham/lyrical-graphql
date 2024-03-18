@@ -1,24 +1,39 @@
 import React, { Component } from "react";
 import gql from "graphql-tag";
+import { graphql } from "react-apollo";
+import fetchLyrics from "../queries/fetchLyrics";
 
 class LyricCreate extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { userInput: "" };
+		this.state = { content: "" };
 	}
 
-	formSubmit() {
-		// some query to add to mongo
+	formSubmit(e) {
+		e.preventDefault();
+		console.log(this.props);
+		try {
+			this.props.mutate({
+				variables: {
+					content: this.state.content,
+					songId: this.props.id,
+				},
+			});
+			this.setState({ content: "" });
+			window.alert("Succesfully added lyric to song!");
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	render() {
 		return (
 			<div>
-				<form onSubmit={() => {}}>
+				<form onSubmit={this.formSubmit.bind(this)}>
 					<label>Create a Lyric:</label>
 					<input
-						value={this.state.userInput}
-						onChange={(e) => this.setState({ userInput: e.target.value })}
+						value={this.state.content}
+						onChange={(e) => this.setState({ content: e.target.value })}
 					/>
 				</form>
 			</div>
@@ -38,4 +53,4 @@ const addLyricMutation = gql`
 	}
 `;
 
-export default LyricCreate;
+export default graphql(addLyricMutation)(LyricCreate);
